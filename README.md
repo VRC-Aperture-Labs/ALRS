@@ -1,2 +1,2 @@
 # GRS
-GRS (GLaDOS Robotics Suite) contains multiple Vex Robotics V5 specific filetypes as well as template code for your own robot.
+GRS (GLaDOS Robotics Suite) a library with a suite of different functions including recording and playback of controller input.
