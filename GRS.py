@@ -60,6 +60,7 @@ buttons = button_event_wrapper(controller)
 # ---------------------------------------------------------------- #
 
 def parse_var(var_name, config=str(bytes(brain.sdcard.loadfile('/GRS/script/config.saashvik')), 'UTF-8')):
+    config = config.replace(' ', '')
     var_name += '='
     if var_name in config:
         start_index = config.index(var_name) + len(var_name)
@@ -69,7 +70,6 @@ def parse_var(var_name, config=str(bytes(brain.sdcard.loadfile('/GRS/script/conf
         return None
 
 config = str(bytes(brain.sdcard.loadfile('/GRS/script/config.saashvik')), 'UTF-8')
-config = config.replace(' ', '')
 
 driving_curve = parse_var('driving_curve', config)
 if not driving_curve:
