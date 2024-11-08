@@ -1,2 +1,7 @@
-autonomous = autonomous.alms
-skills_autonomous = skills.alrs
+driving_curve = quadratic;
+drive_motors = 4;
+
+alrs_mode = record
+alrs = GRS/script/autonomous.alrs
+
+exec_mode = competition
