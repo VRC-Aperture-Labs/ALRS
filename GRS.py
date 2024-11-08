@@ -59,13 +59,36 @@ class button_event_wrapper:
 buttons = button_event_wrapper(controller)
 # ---------------------------------------------------------------- #
 
-def parse_var(var_name, config=str(bytes(brain.sdcard.loadfile('/GRS/script/config.saashvik')), 'UTF-8')):
+def format_config(config):
+    config = config.replace(' ', '')
+
+    index = 0
+    for char in config:
+        if char == '\n':
+            if index == 0:
+                config = config[1:]
+            else:
+                if config[index] != ';':
+                    config = config[0:index] + ';' + config[index:]
+        index += 1
+    
+    config = config.replace('=', ' = ')
+
+def parse_var(var_name, config=';'):
     config = config.replace(' ', '')
     var_name += '='
     if var_name in config:
         start_index = config.index(var_name) + len(var_name)
         end_index = config.index(';', start_index)
-        return config[start_index:end_index]
+        if '\n' in config[start_index:end_index]:
+            config = config.replace(var_name + '\n', '')
+            var = parse_var(var_name, config)
+            if var:
+                return var
+            else:
+                return parse_var(var_name, format_config(config))
+        else:
+            return config[start_index:end_index]
     else:
         return None
 
